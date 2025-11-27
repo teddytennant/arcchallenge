@@ -11,9 +11,9 @@ Provides a rich library of primitive operations organized by type:
 
 from typing import Callable, Any, List, Set as PySet, Tuple, Optional, Dict
 import numpy as np
-from ..arc_core.grid import Grid
-from ..arc_core import grid as grid_ops
-from ..arc_core import objects as obj_ops
+from arc_core.grid import Grid
+from arc_core import grid as grid_ops
+from arc_core import objects as obj_ops
 
 
 # ============================================================================

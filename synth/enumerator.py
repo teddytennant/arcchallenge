@@ -15,10 +15,10 @@ from collections import defaultdict
 import random
 import itertools
 
-from ..dsl.ast import *
-from ..dsl.primitives import ALL_PRIMITIVES, Primitive, get_primitive
-from ..dsl.interpreter import Interpreter, interpret
-from ..arc_core.grid import Grid
+from dsl.ast import *
+from dsl.primitives import ALL_PRIMITIVES, Primitive, get_primitive
+from dsl.interpreter import Interpreter, interpret
+from arc_core.grid import Grid
 import numpy as np
 
 

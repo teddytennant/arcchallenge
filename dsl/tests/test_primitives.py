@@ -282,19 +282,19 @@ def test_if_then_else():
 
 def test_has_symmetry_v():
     """Test vertical symmetry detection."""
-    symmetric = load_grid([[1, 2, 1]])
+    symmetric = load_grid([[1, 2, 1], [1, 2, 1]])
     assert HAS_SYMMETRY_V(symmetric) == True
 
-    asymmetric = load_grid([[1, 2, 3]])
+    asymmetric = load_grid([[1, 2, 3], [4, 5, 6]])
     assert HAS_SYMMETRY_V(asymmetric) == False
 
 
 def test_has_symmetry_h():
     """Test horizontal symmetry detection."""
-    symmetric = load_grid([[1], [2], [1]])
+    symmetric = load_grid([[1, 2, 1]])
     assert HAS_SYMMETRY_H(symmetric) == True
 
-    asymmetric = load_grid([[1], [2], [3]])
+    asymmetric = load_grid([[1, 2, 3]])
     assert HAS_SYMMETRY_H(asymmetric) == False
 
 

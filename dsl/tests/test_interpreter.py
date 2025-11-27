@@ -3,7 +3,7 @@ import pytest
 from dsl.interpreter import (
     Interpreter, Environment, Closure,
     InterpreterError, UndefinedVariableError, TypeError_, RuntimeError_,
-    interpret, run_on_grid, test_program
+    interpret, run_on_grid, run_test_program
 )
 from dsl.ast import Var, Const, Prim, Apply, Lambda, Let, IfThenElse, Program
 from dsl.primitives import ADD, SUB, ROTATE_90
@@ -291,7 +291,7 @@ def test_test_program_function():
     program = Program(Apply(Prim("reflect_h"), [Var("input")]))
     test_cases = [(grid1, grid2)]
 
-    results = test_program(program, test_cases)
+    results = run_test_program(program, test_cases)
 
     assert results['total'] == 1
     assert results['passed'] == 1
@@ -308,7 +308,7 @@ def test_test_program_with_failure():
     program = Program(Apply(Prim("reflect_h"), [Var("input")]))
     test_cases = [(grid1, grid2)]
 
-    results = test_program(program, test_cases)
+    results = run_test_program(program, test_cases)
 
     assert results['total'] == 1
     assert results['passed'] == 0
@@ -323,7 +323,7 @@ def test_test_program_with_error():
     program = Program(Apply(Prim("nonexistent"), [Var("input")]))
     test_cases = [(grid1, grid1)]
 
-    results = test_program(program, test_cases)
+    results = run_test_program(program, test_cases)
 
     assert results['total'] == 1
     assert results['errors'] == 1

@@ -159,8 +159,8 @@ class Interpreter:
 
         # Function application
         elif isinstance(expr, Apply):
-            func = self._eval(expr.func, env)
-            args = [self._eval(arg, env) for arg in expr.args]
+            func = self.eval(expr.func, env)
+            args = [self.eval(arg, env) for arg in expr.args]
 
             # Apply primitive
             if isinstance(func, Primitive):
@@ -180,7 +180,7 @@ class Interpreter:
                         f"arguments, got {len(args)}"
                     )
                 new_env = func.env.extend_many(func.params, args)
-                return self._eval(func.body, new_env)
+                return self.eval(func.body, new_env)
 
             # Apply callable (Python function)
             elif callable(func):
@@ -198,19 +198,19 @@ class Interpreter:
 
         # Let binding
         elif isinstance(expr, Let):
-            value = self._eval(expr.value, env)
+            value = self.eval(expr.value, env)
             new_env = env.extend(expr.var, value)
-            return self._eval(expr.body, new_env)
+            return self.eval(expr.body, new_env)
 
         # Conditional
         elif isinstance(expr, IfThenElse):
-            cond = self._eval(expr.cond, env)
+            cond = self.eval(expr.cond, env)
             if not isinstance(cond, bool):
                 raise TypeError_(f"Condition must be boolean, got {type(cond)}")
             if cond:
-                return self._eval(expr.then_branch, env)
+                return self.eval(expr.then_branch, env)
             else:
-                return self._eval(expr.else_branch, env)
+                return self.eval(expr.else_branch, env)
 
         else:
             raise RuntimeError_(f"Unknown expression type: {type(expr)}")
@@ -271,8 +271,8 @@ def run_on_grid(program: Program, grid: Any, debug: bool = False) -> Any:
     return interpreter.run_program(program, grid)
 
 
-def test_program(program: Program, test_cases: List[tuple],
-                 debug: bool = False) -> Dict[str, Any]:
+def run_test_program(program: Program, test_cases: List[tuple],
+                     debug: bool = False) -> Dict[str, Any]:
     """Test a program on multiple input/output pairs.
 
     Args:

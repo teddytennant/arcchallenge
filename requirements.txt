@@ -1,2 +1,29 @@
-numpy
-pytest
+# Core dependencies
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Testing
+pytest>=7.3.0
+pytest-cov>=4.0.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+pillow>=9.5.0
+
+# Machine Learning (optional, for neural components)
+torch>=2.0.0; python_version >= '3.8'
+scikit-learn>=1.2.0
+
+# Utilities
+tqdm>=4.65.0
+pandas>=2.0.0
+
+# Type checking and quality
+mypy>=1.3.0
+black>=23.3.0
+flake8>=6.0.0
+
+# Documentation
+sphinx>=6.2.0
+sphinx-rtd-theme>=1.2.0

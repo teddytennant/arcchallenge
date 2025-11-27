@@ -1,0 +1,27 @@
+[package]
+name = "arc_synth_rs"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[lib]
+name = "arc_synth_rs"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+pyo3.workspace = true
+rayon.workspace = true
+crossbeam.workspace = true
+rustc-hash.workspace = true
+ahash.workspace = true
+smallvec.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+criterion = "0.5"
+
+[[bench]]
+name = "synthesis"
+harness = false

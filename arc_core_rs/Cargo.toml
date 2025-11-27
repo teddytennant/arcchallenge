@@ -1,0 +1,26 @@
+[package]
+name = "arc_core_rs"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[lib]
+name = "arc_core_rs"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+pyo3.workspace = true
+numpy.workspace = true
+rayon.workspace = true
+rustc-hash.workspace = true
+ahash.workspace = true
+smallvec.workspace = true
+anyhow.workspace = true
+
+[dev-dependencies]
+criterion = "0.5"
+
+[[bench]]
+name = "grid_ops"
+harness = false

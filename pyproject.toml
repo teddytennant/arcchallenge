@@ -1,0 +1,77 @@
+[build-system]
+requires = ["maturin>=1.4,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "arcchallenge"
+version = "1.0.0"
+description = "Comprehensive ARC Challenge Solver with Rust acceleration"
+authors = [
+    {name = "ARC Challenge Solver Contributors"}
+]
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Rust",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "pytest>=7.3.0",
+    "matplotlib>=3.7.0",
+    "tqdm>=4.65.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "maturin>=1.4.0",
+    "pytest-cov>=4.0.0",
+    "mypy>=1.3.0",
+    "black>=23.3.0",
+]
+ml = [
+    "torch>=2.0.0",
+    "scikit-learn>=1.2.0",
+]
+viz = [
+    "seaborn>=0.12.0",
+    "pillow>=9.5.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/arcchallenge"
+Repository = "https://github.com/yourusername/arcchallenge"
+Documentation = "https://arcchallenge.readthedocs.io"
+
+[tool.maturin]
+features = ["pyo3/extension-module"]
+python-source = "."
+module-name = "arcchallenge"
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311']
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+testpaths = ["arc_core/tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "-v --tb=short"

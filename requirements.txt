@@ -27,3 +27,6 @@ flake8>=6.0.0
 # Documentation
 sphinx>=6.2.0
 sphinx-rtd-theme>=1.2.0
+
+# Rust extension building (optional but recommended for 10-100x performance)
+maturin>=1.4.0

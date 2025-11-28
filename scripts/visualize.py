@@ -6,6 +6,8 @@ Provides tools to visualize grids, tasks, and program execution.
 
 from typing import List, Optional, Tuple
 import numpy as np
+import io
+import base64
 
 try:
     import matplotlib.pyplot as plt
@@ -15,7 +17,10 @@ try:
 except ImportError:
     HAS_MATPLOTLIB = False
 
-from ..arc_core.grid import Grid
+try:
+    from ..arc_core.grid import Grid
+except ImportError:
+    from arc_core.grid import Grid
 
 
 # ARC color palette
@@ -271,3 +276,33 @@ def create_animation(grids: List[Grid], titles: Optional[List[str]] = None,
     )
 
     print(f"Animation saved to {save_path}")
+
+
+def grid_to_base64(grid: Grid, size: Tuple[int, int] = (300, 300)) -> str:
+    """
+    Convert a grid to a base64-encoded PNG image for embedding in HTML.
+
+    Args:
+        grid: Grid to convert
+        size: Size of the output image in pixels (width, height)
+
+    Returns:
+        Base64-encoded PNG image string
+    """
+    if not HAS_MATPLOTLIB:
+        raise ImportError("matplotlib is required for visualization")
+
+    # Create figure
+    fig, ax = plt.subplots(figsize=(size[0]/100, size[1]/100), dpi=100)
+    plot_grid(grid, ax=ax, title="", show_grid=True)
+
+    # Save to buffer
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png', bbox_inches='tight', pad_inches=0.1)
+    plt.close(fig)
+
+    # Encode as base64
+    buf.seek(0)
+    img_base64 = base64.b64encode(buf.read()).decode('utf-8')
+
+    return f"data:image/png;base64,{img_base64}"
